@@ -52,7 +52,7 @@ echo
 echo "The tarball will be written to the parent folder:"
 echo "    $(dirname $CURDIR)/$NAME.tar.gz"
 
-git-archive-all $HEAD --prefix=$NAME/ -o $TMPDIR/$NAME.tar
+git-archive-all $HEAD --prefix=$NAME/ $TMPDIR/$NAME.tar
 
 # Adding custom .git/HEAD to tarball so that we can generate VERSION_HASH.
 cd $TMPDIR
