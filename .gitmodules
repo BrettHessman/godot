@@ -1,3 +1,7 @@
 [submodule "modules/luaAPI"]
 	path = modules/luaAPI
 	url = https://github.com/WeaselGames/godot_luaAPI.git
+[submodule "modules/omg"]
+	path = modules/omg
+	url = https://github.com/BrettHessman/omg-module.git
+	branch = master
