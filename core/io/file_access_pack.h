@@ -115,7 +115,7 @@ public:
 	_FORCE_INLINE_ bool is_disabled() const { return disabled; }
 
 	static PackedData *get_singleton() { return singleton; }
-	Error add_pack(const String &p_path, bool p_replace_files, uint64_t p_offset);
+	Error add_pack(const String &p_path, bool p_replace_files, uint64_t p_offset, bool p_include_scripts);
 
 	_FORCE_INLINE_ Ref<FileAccess> try_open_path(const String &p_path);
 	_FORCE_INLINE_ bool has_path(const String &p_path);
