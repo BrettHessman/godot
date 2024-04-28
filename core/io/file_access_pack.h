@@ -129,14 +129,14 @@ public:
 
 class PackSource {
 public:
-	virtual bool try_open_pack(const String &p_path, bool p_replace_files, uint64_t p_offset, bool p_include_scripts, bool p_include_scripts) = 0;
+	virtual bool try_open_pack(const String &p_path, bool p_replace_files, uint64_t p_offset, bool p_include_scripts) = 0;
 	virtual Ref<FileAccess> get_file(const String &p_path, PackedData::PackedFile *p_file) = 0;
 	virtual ~PackSource() {}
 };
 
 class PackedSourcePCK : public PackSource {
 public:
-	virtual bool try_open_pack(const String &p_path, bool p_replace_files, uint64_t p_offset) override;
+	virtual bool try_open_pack(const String &p_path, bool p_replace_files, uint64_t p_offset, bool p_include_scripts) override;
 	virtual Ref<FileAccess> get_file(const String &p_path, PackedData::PackedFile *p_file) override;
 };
 
