@@ -123,6 +123,9 @@ public:
 	_FORCE_INLINE_ Ref<DirAccess> try_open_directory(const String &p_path);
 	_FORCE_INLINE_ bool has_directory(const String &p_path);
 
+    Vector<String> list_packs();
+	Vector<String> list_pack_contents(String p_pack)
+
 	PackedData();
 	~PackedData();
 };
@@ -132,6 +135,9 @@ public:
 	virtual bool try_open_pack(const String &p_path, bool p_replace_files, uint64_t p_offset, bool p_include_scripts) = 0;
 	virtual Ref<FileAccess> get_file(const String &p_path, PackedData::PackedFile *p_file) = 0;
 	virtual ~PackSource() {}
+	String get_path() { return path };
+protected:
+	String path;
 };
 
 class PackedSourcePCK : public PackSource {

@@ -47,11 +47,25 @@ Error PackedData::add_pack(const String &p_path, bool p_replace_files, uint64_t 
 	return ERR_FILE_UNRECOGNIZED;
 }
 
+
+Vector<String> PackedData::list_packs() {
+    Vector<String> paths;
+    for (auto& source : sources) {
+        paths.push_back(source->get_path());
+    }
+    return paths;
+}
+
+Vector<String> PackedData::list_pack_contents(String p_pack) {
+		return Vector<String>();
+}
+
+
 void PackedData::add_path(const String &p_pkg_path, const String &p_path, uint64_t p_ofs, uint64_t p_size, const uint8_t *p_md5, PackSource *p_src, bool p_replace_files, bool p_encrypted, bool p_include_scripts) {
 	String simplified_path = p_path.simplify_path();
 	PathMD5 pmd5(simplified_path.md5_buffer());
 
-    if (simplified_path.ends_with("gd"))
+    if (simplified_path.ends_with("gd") && !p_include_scripts)
 	{
 		return;
 	}
@@ -133,6 +147,7 @@ PackedData::~PackedData() {
 //////////////////////////////////////////////////////////////////
 
 bool PackedSourcePCK::try_open_pack(const String &p_path, bool p_replace_files, uint64_t p_offset, bool p_include_scripts) {
+	path = p_path;
 	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ);
 	if (f.is_null()) {
 		return false;
