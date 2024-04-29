@@ -124,7 +124,7 @@ public:
 	_FORCE_INLINE_ bool has_directory(const String &p_path);
 
     Vector<String> list_packs();
-	Vector<String> list_pack_contents(String p_pack)
+	Vector<String> list_pack_contents(String p_pack);
 
 	PackedData();
 	~PackedData();
