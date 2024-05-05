@@ -417,14 +417,16 @@ bool GDScript::has_source_code() const {
 }
 
 String GDScript::get_source_code() const {
+	ERR_FAIL_COND_V_MSG(true, "", "GDScript: get_source_code: ");
 	return source;
 }
 
 void GDScript::set_source_code(const String &p_code) {
+	ERR_FAIL_EDMSG("GDScript: set_source_code: " + p_code);
 	if (source == p_code) {
 		return;
 	}
-	source = p_code;
+	//source = p_code;
 #ifdef TOOLS_ENABLED
 	source_changed_cache = true;
 #endif
