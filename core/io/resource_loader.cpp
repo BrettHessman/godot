@@ -858,6 +858,12 @@ String ResourceLoader::get_resource_type(const String &p_path) {
 String ResourceLoader::get_resource_script_class(const String &p_path) {
 	String local_path = _validate_local_path(p_path);
 
+	if (local_path.ends_with(".scn") || local_path.ends_with(".tscn"))
+	{
+		WARN_PRINT_ED("ResourceLoader::get_resource_script_class(" + p_path + ") => ''");
+		return "";
+	}
+
 	for (int i = 0; i < loader_count; i++) {
 		String result = loader[i]->get_resource_script_class(local_path);
 		if (!result.is_empty()) {
