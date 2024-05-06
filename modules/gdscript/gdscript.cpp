@@ -417,12 +417,12 @@ bool GDScript::has_source_code() const {
 }
 
 String GDScript::get_source_code() const {
-	WARN_PRINT_ED("GDScript: get_source_code: " + source);
+	//WARN_PRINT_ED("GDScript: get_source_code: " + source);
 	return source;
 }
 
 void GDScript::set_source_code(const String &p_code) {
-	WARN_PRINT_ED("GDScript: set_source_code: " + p_code);
+	//WARN_PRINT_ED("GDScript: set_source_code: " + p_code);
 	if (source == p_code) {
 		return;
 	}
