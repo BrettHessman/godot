@@ -858,7 +858,7 @@ String ResourceLoader::get_resource_type(const String &p_path) {
 String ResourceLoader::get_resource_script_class(const String &p_path) {
 	String local_path = _validate_local_path(p_path);
 
-	if (local_path.ends_with(".scn") || local_path.ends_with(".tscn"))
+	if (local_path.ends_with(".scn") || local_path.ends_with(".tscn") || local_path.ends_with(".res"))
 	{
 		WARN_PRINT_ED("ResourceLoader::get_resource_script_class(" + p_path + ") => ''");
 		return "";
