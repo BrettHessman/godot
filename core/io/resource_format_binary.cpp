@@ -1180,6 +1180,7 @@ Ref<Resource> ResourceFormatLoaderBinary::load(const String &p_path, const Strin
 	if (r_error) {
 		*r_error = ERR_FILE_CANT_OPEN;
 	}
+	WARN_PRINT("ResourceFormatLoaderBinary::load(" + p_path + ")");
 
 	Error err;
 	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ, &err);

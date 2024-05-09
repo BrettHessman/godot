@@ -1635,6 +1635,7 @@ Ref<Resource> ResourceFormatLoaderText::load(const String &p_path, const String 
 	if (r_error) {
 		*r_error = ERR_CANT_OPEN;
 	}
+	WARN_PRINT("ResourceFormatLoaderText::load(" + p_path + ")");
 
 	Error err;
 
