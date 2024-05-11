@@ -714,12 +714,15 @@ bool ResourceLoader::exists(const String &p_path, const String &p_type_hint) {
 
 Ref<ResourceFormatLoader> ResourceLoader::locate_script_loader()
 {
+	WARN_PRINT("ResourceLoader::locate_script_loader");
 	for (int i = loader_count; i > 0; i--) {
 		if (loader[i]->handles_type("gdscript"))
 		{
+			WARN_PRINT("ResourceLoader::locate_script_loader->Found");
 			return loader[i];
 		}
 	}
+	WARN_PRINT("ResourceLoader::locate_script_loader->NotFound");
 	return nullptr;
 }
 

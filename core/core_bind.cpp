@@ -94,7 +94,7 @@ void ResourceLoader::remove_resource_format_loader(Ref<ResourceFormatLoader> p_f
 }
 
 Ref<ResourceFormatLoader> ResourceLoader::locate_script_loader() {
-	::ResourceLoader::locate_script_loader();
+	return ::ResourceLoader::locate_script_loader();
 }
 
 void ResourceLoader::set_abort_on_missing_resources(bool p_abort) {
