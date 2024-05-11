@@ -712,6 +712,17 @@ bool ResourceLoader::exists(const String &p_path, const String &p_type_hint) {
 	return false;
 }
 
+Ref<ResourceFormatLoader> ResourceLoader::locate_script_loader()
+{
+	for (int i = loader_count; i > 0; i--) {
+		if (loader[i]->handles_type("gdscript"))
+		{
+			return loader[i];
+		}
+	}
+	return nullptr;
+}
+
 void ResourceLoader::add_resource_format_loader(Ref<ResourceFormatLoader> p_format_loader, bool p_at_front) {
 	ERR_FAIL_COND(p_format_loader.is_null());
 	ERR_FAIL_COND(loader_count >= MAX_LOADERS);
