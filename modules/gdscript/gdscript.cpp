@@ -2782,6 +2782,8 @@ Ref<GDScript> GDScriptLanguage::get_script_by_fully_qualified_name(const String 
 /*************** RESOURCE ***************/
 
 Ref<Resource> ResourceFormatLoaderGDScript::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
+	WARN_PRINT("ResourceFormatLoaderGDScript::load(" + p_path + ", " + p_original_path + ")");
+
 	Error err;
 	Ref<GDScript> scr = GDScriptCache::get_full_script(p_path, err, "", p_cache_mode == CACHE_MODE_IGNORE);
 
