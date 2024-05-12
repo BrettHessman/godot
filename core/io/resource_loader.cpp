@@ -717,10 +717,12 @@ Ref<ResourceFormatLoader> ResourceLoader::locate_script_loader()
 	WARN_PRINT("ResourceLoader::locate_script_loader");
 	int i = 0;
 	for (; i < loader_count; ++i) {
-		if (loader[i]->handles_type("gdscript"))
+		if (loader[i]->handles_type("gdscript")) // can load scripts
 		{
-			WARN_PRINT("ResourceLoader::locate_script_loader->Found");
-			return loader[i];
+			if (!loader[i]->handles_type("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")) { // doesnt load everything
+				WARN_PRINT("ResourceLoader::locate_script_loader->Found");
+				return loader[i];
+			}
 		}
 	}
 	WARN_PRINT("ResourceLoader::locate_script_loader->NotFound");
