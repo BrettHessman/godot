@@ -717,9 +717,11 @@ Ref<ResourceFormatLoader> ResourceLoader::locate_script_loader()
 	WARN_PRINT("ResourceLoader::locate_script_loader");
 	int i = 0;
 	for (; i < loader_count; ++i) {
-		if (loader[i]->handles_type("gdscript")) // can load scripts
+		if (loader[i]->handles_type("GDScript")) // can load scripts
 		{
-			if (!loader[i]->handles_type("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")) { // doesnt load everything
+			List<String> exts;
+			loader[i]->get_recognized_extensions(&exts);
+			if (exts.size() == 1 && exts[0] == "gd") {
 				WARN_PRINT("ResourceLoader::locate_script_loader->Found");
 				return loader[i];
 			}
