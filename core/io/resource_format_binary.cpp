@@ -733,6 +733,15 @@ Error ResourceLoaderBinary::load() {
 
 		String t = get_unicode_string();
 
+		if (!ResourceLoader::get_unsafe_script_mode()) {
+			if (t.to_lower() == "gdscript") {
+				error = ERR_FILE_CORRUPT;
+				WARN_PRINT("Script mode is set to safe-only ERROR loading internal resource:(" + path + "),T=" + t);
+				return error;
+			}
+		}
+
+
 		Ref<Resource> res;
 
 		if (cache_mode == ResourceFormatLoader::CACHE_MODE_REPLACE && ResourceCache::has(path)) {
@@ -792,11 +801,20 @@ Error ResourceLoaderBinary::load() {
 
 		for (int j = 0; j < pc; j++) {
 			StringName name = _get_string();
-
+			
 			if (name == StringName()) {
 				error = ERR_FILE_CORRUPT;
 				ERR_FAIL_V(ERR_FILE_CORRUPT);
 			}
+
+			if (!ResourceLoader::get_unsafe_script_mode()) {
+				if (name == "script") {
+					error = ERR_FILE_CORRUPT;
+					WARN_PRINT("Script mode is set to safe-only ERROR loading internal resource:(" + path + "),T=" + t);
+					return error;
+				}
+			}
+
 
 			Variant value;
 
@@ -1043,6 +1061,17 @@ void ResourceLoaderBinary::open(Ref<FileAccess> p_f, bool p_no_resources, bool p
 		ExtResource er;
 		er.type = get_unicode_string();
 		er.path = get_unicode_string();
+
+		// TODO TEST
+		if (!ResourceLoader::get_unsafe_script_mode()) {
+			if (er.type.to_lower() == "gdscript") {
+				//error = ERR_FILE_CORRUPT;
+				WARN_PRINT("Script mode is set to safe-only not loading external resource:" + er.path);
+				//f.unref();
+				//return;
+			}
+		}
+
 		if (using_uids) {
 			er.uid = f->get_64();
 			if (!p_keep_uuid_paths && er.uid != ResourceUID::INVALID_ID) {

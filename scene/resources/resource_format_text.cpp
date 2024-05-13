@@ -510,6 +510,16 @@ Error ResourceLoaderText::load() {
 		}
 
 		String type = next_tag.fields["type"];
+
+		if (!ResourceLoader::get_unsafe_script_mode()) {
+			if (type.to_lower() == "gdscript") {
+				error = ERR_FILE_CORRUPT;
+				error_text = "Unsafe script detected - sub_resource has gdscript - kill load";
+				_printerr();
+				return error;
+			}
+		}
+
 		String id = next_tag.fields["id"];
 
 		String path = local_path + "::" + id;
@@ -661,6 +671,15 @@ Error ResourceLoaderText::load() {
 			return error;
 		}
 
+		if (!ResourceLoader::get_unsafe_script_mode()) {
+			if (next_tag.fields.has("script")) {
+				error = ERR_FILE_CORRUPT;
+				error_text = "Unsafe script detected - resource has script - kill load";
+				_printerr();
+				return error;
+			}
+		}
+
 		Ref<Resource> cache = ResourceCache::get_ref(local_path);
 		if (cache_mode == ResourceFormatLoader::CACHE_MODE_REPLACE && cache.is_valid() && cache->get_class() == res_type) {
 			cache->reset_state();
@@ -787,6 +806,15 @@ Error ResourceLoaderText::load() {
 			_printerr();
 			error = ERR_FILE_CORRUPT;
 			return error;
+		}
+
+		if (!ResourceLoader::get_unsafe_script_mode()) {
+			if (next_tag.fields.has("script")) {
+				error = ERR_FILE_CORRUPT;
+				error_text = "Unsafe script detected - node has script - kill load";
+				_printerr();
+				return error;
+			}
 		}
 
 		Ref<PackedScene> packed_scene = _parse_node_tag(rp);

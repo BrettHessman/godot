@@ -246,6 +246,7 @@ public:
 	static void set_abort_on_missing_resources(bool p_abort) { abort_on_missing_resource = p_abort; }
 	static bool get_abort_on_missing_resources() { return abort_on_missing_resource; }
 	static void set_unsafe_script_mode(bool p_enabled) { unsafe_script_mode = p_enabled; }
+	static bool get_unsafe_script_mode() { return unsafe_script_mode; }
 
 	static String path_remap(const String &p_path);
 	static String import_remap(const String &p_path);
