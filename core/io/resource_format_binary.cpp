@@ -807,13 +807,6 @@ Error ResourceLoaderBinary::load() {
 				ERR_FAIL_V(ERR_FILE_CORRUPT);
 			}
 
-			if (!ResourceLoader::get_unsafe_script_mode()) {
-				if (name == "script") {
-					error = ERR_FILE_CORRUPT;
-					WARN_PRINT("Script mode is set to safe-only ERROR loading internal resource:(" + path + "),T=" + t);
-					return error;
-				}
-			}
 
 
 			Variant value;
@@ -824,6 +817,16 @@ Error ResourceLoaderBinary::load() {
 			}
 
 			bool set_valid = true;
+
+			if (!ResourceLoader::get_unsafe_script_mode()) {
+				if (name == "script") {
+					//error = ERR_FILE_CORRUPT;
+					WARN_PRINT("Script mode is set to safe-only SET_VALID=FALSE loading internal resource:(" + path + "),T=" + t + ",N=" + name + "V=(" + value.stringify(1) + ")");
+					//return error;
+					set_valid = false;
+				}
+			}
+
 			if (value.get_type() == Variant::OBJECT && missing_resource != nullptr) {
 				// If the property being set is a missing resource (and the parent is not),
 				// then setting it will most likely not work.
