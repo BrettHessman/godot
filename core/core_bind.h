@@ -85,6 +85,8 @@ public:
 	bool exists(const String &p_path, const String &p_type_hint = "");
 	ResourceUID::ID get_resource_uid(const String &p_path);
 
+	void set_unsafe_script_mode(bool p_enabled);
+
 	ResourceLoader() { singleton = this; }
 };
 

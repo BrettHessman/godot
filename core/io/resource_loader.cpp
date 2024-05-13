@@ -429,6 +429,13 @@ Ref<Resource> ResourceLoader::load(const String &p_path, const String &p_type_hi
 Ref<ResourceLoader::LoadToken> ResourceLoader::_load_start(const String &p_path, const String &p_type_hint, LoadThreadMode p_thread_mode, ResourceFormatLoader::CacheMode p_cache_mode) {
 	String local_path = _validate_local_path(p_path);
 
+	WARN_PRINT("ResourceLoader::_load_start(" + p_path + "," + p_type_hint + ") local(" + local_path + ")");
+	if (!unsafe_script_mode && (p_type_hint.to_lower() == "script" || p_type_hint.to_lower() == "gdscript"))
+	{
+		WARN_PRINT("ResourceLoader::_load_start: kill-load");
+		return nullptr;
+	}
+
 	Ref<LoadToken> load_token;
 	bool must_not_register = false;
 	ThreadLoadTask unregistered_load_task; // Once set, must be valid up to the call to do the load.
@@ -1201,6 +1208,7 @@ DependencyErrorNotify ResourceLoader::dep_err_notify = nullptr;
 
 bool ResourceLoader::create_missing_resources_if_class_unavailable = false;
 bool ResourceLoader::abort_on_missing_resource = true;
+bool ResourceLoader::unsafe_script_mode = true;
 bool ResourceLoader::timestamp_on_load = false;
 
 thread_local int ResourceLoader::load_nesting = 0;

@@ -141,6 +141,7 @@ private:
 	static DependencyErrorNotify dep_err_notify;
 	static bool abort_on_missing_resource;
 	static bool create_missing_resources_if_class_unavailable;
+	static bool unsafe_script_mode;
 	static HashMap<String, Vector<String>> translation_remaps;
 	static HashMap<String, String> path_remaps;
 
@@ -244,6 +245,7 @@ public:
 
 	static void set_abort_on_missing_resources(bool p_abort) { abort_on_missing_resource = p_abort; }
 	static bool get_abort_on_missing_resources() { return abort_on_missing_resource; }
+	static void set_unsafe_script_mode(bool p_enabled) { unsafe_script_mode = p_enabled; }
 
 	static String path_remap(const String &p_path);
 	static String import_remap(const String &p_path);

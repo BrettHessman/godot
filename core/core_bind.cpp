@@ -101,6 +101,10 @@ void ResourceLoader::set_abort_on_missing_resources(bool p_abort) {
 	::ResourceLoader::set_abort_on_missing_resources(p_abort);
 }
 
+void ResourceLoader::set_unsafe_script_mode(bool p_enabled) {
+	::ResourceLoader::set_unsafe_script_mode(p_enabled);
+}
+
 PackedStringArray ResourceLoader::get_dependencies(const String &p_path) {
 	List<String> deps;
 	::ResourceLoader::get_dependencies(p_path, &deps);
@@ -137,6 +141,7 @@ void ResourceLoader::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("remove_resource_format_loader", "format_loader"), &ResourceLoader::remove_resource_format_loader);
 	ClassDB::bind_method(D_METHOD("locate_script_loader"), &ResourceLoader::locate_script_loader);
 	ClassDB::bind_method(D_METHOD("set_abort_on_missing_resources", "abort"), &ResourceLoader::set_abort_on_missing_resources);
+	ClassDB::bind_method(D_METHOD("set_unsafe_script_mode", "enabled"), &ResourceLoader::set_unsafe_script_mode);
 	ClassDB::bind_method(D_METHOD("get_dependencies", "path"), &ResourceLoader::get_dependencies);
 	ClassDB::bind_method(D_METHOD("has_cached", "path"), &ResourceLoader::has_cached);
 	ClassDB::bind_method(D_METHOD("exists", "path", "type_hint"), &ResourceLoader::exists, DEFVAL(""));
