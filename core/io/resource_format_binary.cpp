@@ -819,9 +819,9 @@ Error ResourceLoaderBinary::load() {
 			bool set_valid = true;
 
 			if (!ResourceLoader::get_unsafe_script_mode()) {
-				if (name == "script") {
+				if (name == "script" && value.get_type() != Variant::Type::NIL) {
 					//error = ERR_FILE_CORRUPT;
-					WARN_PRINT("Script mode is set to safe-only SET_VALID=FALSE loading internal resource:(" + path + "),T=" + t + ",N=" + name + "V=(" + value.stringify(1) + ")");
+					WARN_PRINT("Script mode is set to safe-only SET_VALID=FALSE loading internal resource:(" + path + "),T=" + t + ",N=" + name + ",V=(" + value.stringify(1) + ")");
 					//return error;
 					set_valid = false;
 				}
